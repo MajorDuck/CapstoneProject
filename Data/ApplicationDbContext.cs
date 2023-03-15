@@ -11,5 +11,7 @@ namespace CapstoneProject.Data
 		{
 		}
 		public DbSet<Capstone.Models.Document>? Document { get; set; }
+		public DbSet<Capstone.Models.DocumentStatus>? DocumentStatus { get; set; }
+		public DbSet<Capstone.Models.DocumentType>? DocumentType { get; set; }
 	}
 }

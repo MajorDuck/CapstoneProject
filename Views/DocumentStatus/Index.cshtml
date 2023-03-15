@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Capstone.Models.DocumentStatus>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentStatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentStatusColor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentStatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentStatusColor)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DocumentStatusID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DocumentStatusID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DocumentStatusID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

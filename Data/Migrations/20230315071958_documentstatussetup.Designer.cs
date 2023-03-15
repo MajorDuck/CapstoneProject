@@ -4,6 +4,7 @@ using CapstoneProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230315071958_documentstatussetup")]
+    partial class documentstatussetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,23 +89,6 @@ namespace CapstoneProject.Data.Migrations
                     b.HasKey("DocumentStatusID");
 
                     b.ToTable("DocumentStatus");
-                });
-
-            modelBuilder.Entity("Capstone.Models.DocumentType", b =>
-                {
-                    b.Property<int>("DocumentTypeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentTypeID"), 1L, 1);
-
-                    b.Property<string>("DocumentTypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DocumentTypeID");
-
-                    b.ToTable("DocumentType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

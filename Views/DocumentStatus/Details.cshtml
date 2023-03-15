@@ -1,0 +1,30 @@
+﻿@model Capstone.Models.DocumentStatus
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DocumentStatus</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocumentStatusName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentStatusName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DocumentStatusColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentStatusColor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.DocumentStatusID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
