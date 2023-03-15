@@ -15,5 +15,6 @@ namespace CapstoneProject.Data
 		public DbSet<Capstone.Models.DocumentType>? DocumentType { get; set; }
 		public DbSet<Capstone.Models.Llc>? Llc { get; set; }
 		public DbSet<Capstone.Models.Role>? Role { get; set; }
+		public DbSet<Capstone.Models.User>? User { get; set; }
 	}
 }
