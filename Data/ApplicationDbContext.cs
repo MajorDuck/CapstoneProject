@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Capstone.Models;
 
 namespace CapstoneProject.Data
 {
@@ -9,5 +10,6 @@ namespace CapstoneProject.Data
 			: base(options)
 		{
 		}
+		public DbSet<Capstone.Models.Document>? Document { get; set; }
 	}
 }

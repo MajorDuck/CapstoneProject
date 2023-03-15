@@ -1,0 +1,78 @@
+﻿@model Capstone.Models.Document
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Document</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DocumentTypeID" class="control-label"></label>
+                <input asp-for="DocumentTypeID" class="form-control" />
+                <span asp-validation-for="DocumentTypeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LlcID" class="control-label"></label>
+                <input asp-for="LlcID" class="form-control" />
+                <span asp-validation-for="LlcID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CniPosRequestorUserID" class="control-label"></label>
+                <input asp-for="CniPosRequestorUserID" class="form-control" />
+                <span asp-validation-for="CniPosRequestorUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CniContractNumber" class="control-label"></label>
+                <input asp-for="CniContractNumber" class="form-control" />
+                <span asp-validation-for="CniContractNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThirdParty" class="control-label"></label>
+                <input asp-for="ThirdParty" class="form-control" />
+                <span asp-validation-for="ThirdParty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VersionNumber" class="control-label"></label>
+                <input asp-for="VersionNumber" class="form-control" />
+                <span asp-validation-for="VersionNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DocumentStatusID" class="control-label"></label>
+                <input asp-for="DocumentStatusID" class="form-control" />
+                <span asp-validation-for="DocumentStatusID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DraftedByUserID" class="control-label"></label>
+                <input asp-for="DraftedByUserID" class="form-control" />
+                <span asp-validation-for="DraftedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateLastUpdated" class="control-label"></label>
+                <input asp-for="DateLastUpdated" class="form-control" />
+                <span asp-validation-for="DateLastUpdated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinkToDocument" class="control-label"></label>
+                <input asp-for="LinkToDocument" class="form-control" />
+                <span asp-validation-for="LinkToDocument" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
