@@ -9,4 +9,4 @@ program.cs -> testing
 https://cnicapstoneproject.azurewebsites.net/
 
 
-![alt text](https://github.com/MajorDuck/CapstoneProject/blob/master/SiteWireframe.pdf?raw=true)
+![Wire Frame for Website](https://github.com/MajorDuck/CapstoneProject/blob/master/SiteWireframe.pdf?raw=true)
