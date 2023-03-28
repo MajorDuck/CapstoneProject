@@ -6,7 +6,7 @@
 
 <h1>Overview</h1>
 
-<table border="0" cellpadding="1" cellspacing="1" style="width:1000px">
+<table>
     <tbody>
         <tr> <!--Table Headers-->
             <td><h3>nearing completion</h3></td>
@@ -19,55 +19,66 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.DocumentTypeID)
+                                Type
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LlcID)
+                                CNI LLC
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.VersionNumber)
+                                Contract ID
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DocumentStatusID)
+                                Status
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DateLastUpdated)
+                                Last Updated
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LinkToDocument)
+                                Link
                             </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DocumentTypeID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LlcID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.VersionNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DocumentStatusID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>Subcontract</td>
+                            <td>Chickasaw Strategic Pointe</td>
+                            <td>1709</td>
+                            <td>Drafting</td>
+                            <td>3/20/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Subcontract Mod</td>
+                            <td>DIGITALiBiz</td>
+                            <td>1732</td>
+                            <td>Approval</td>
+                            <td>2/27/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>ATP</td>
+                            <td>Chickasaw Business Solutions</td>
+                            <td>1716</td>
+                            <td>Filing</td>
+                            <td>2/15/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Task Order</td>
+                            <td>Technology trends group</td>
+                            <td>1699</td>
+                            <td>Negotation</td>
+                            <td>2/19/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Task Order Mod</td>
+                            <td>Chickasaw management services</td>
+                            <td>1689</td>
+                            <td>Signature</td>
+                            <td>3/03/2023</td>
+                            <td>link</td>
+                        </tr>
                     </tbody>
                 </table>
             </td>
@@ -77,55 +88,66 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.DocumentTypeID)
+                                Type
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LlcID)
+                                CNI LLC
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.VersionNumber)
+                                Contract ID
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DocumentStatusID)
+                                Status
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DateLastUpdated)
+                                Last Updated
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LinkToDocument)
+                                Link
                             </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DocumentTypeID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LlcID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.VersionNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DocumentStatusID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>ATP</td>
+                            <td>Chickasaw Defense Group</td>
+                            <td>1599</td>
+                            <td>Signature</td>
+                            <td>2/02/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Task Order</td>
+                            <td>Chickasaw Defense Logistics</td>
+                            <td>1614</td>
+                            <td>Signature</td>
+                            <td>1/26/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Subcontract</td>
+                            <td>CNI Advantage</td>
+                            <td>1647</td>
+                            <td>Signature</td>
+                            <td>1/22/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Subcontract Mod</td>
+                            <td>Filtra-Systems Company</td>
+                            <td>1622</td>
+                            <td>Signature</td>
+                            <td>1/18/2023</td>
+                            <td>link</td>
+                        </tr>
+                        <tr>
+                            <td>Task Order Mod</td>
+                            <td>IPKeys</td>
+                            <td>1650</td>
+                            <td>Signature</td>
+                            <td>1/06/2023</td>
+                            <td>link</td>
+                        </tr>
                     </tbody>
                 </table>
             </td>
