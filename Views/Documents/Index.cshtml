@@ -4,11 +4,141 @@
     ViewData["Title"] = "Index";
 }
 
+<h1>Overview</h1>
+
+<table border="0" cellpadding="1" cellspacing="1" style="width:1000px">
+    <tbody>
+        <tr> <!--Table Headers-->
+            <td><h3>nearing completion</h3></td>
+            <td><h3>potentially neglected</h3></td>
+        </tr>
+        <tr>
+            <td>
+                <!--'nearing completion' Table-->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DocumentTypeID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LlcID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.VersionNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DocumentStatusID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateLastUpdated)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LinkToDocument)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentTypeID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LlcID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VersionNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentStatusID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <!--'potentially neglected' Table-->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DocumentTypeID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LlcID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.VersionNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DocumentStatusID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateLastUpdated)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LinkToDocument)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentTypeID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LlcID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VersionNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentStatusID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<!--Index Table-->
 <table class="table">
     <thead>
         <tr>
