@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using CapstoneProject.Data;
+using CapstoneProject.ViewModels;
 
 namespace CapstoneProject.Controllers
 {
@@ -48,7 +49,30 @@ namespace CapstoneProject.Controllers
         // GET: Documents/Create
         public IActionResult Create()
         {
-            return View();
+            var document_statuses = _context.DocumentStatus.Select(a => new SelectListItem()
+            {
+                Value = a.DocumentStatusID.ToString(),
+                Text = a.DocumentStatusName
+            }).ToList();
+
+            var document_types = _context.DocumentType.Select(a => new SelectListItem() { 
+                Value = a.DocumentTypeID.ToString(),
+                Text = a.DocumentTypeName
+                }).ToList();
+
+            var llcs = _context.Llc.Select(a => new SelectListItem()
+            {
+                Value = a.LlcID.ToString(),
+                Text = a.LlcName
+            }).ToList();
+
+            var viewModel = new DocumentFormViewModel
+            {
+                DocumentStatuses = document_statuses,
+                DocumentTypes = document_types,
+                Llcs = llcs
+            };
+            return View(viewModel);
         }
 
         // POST: Documents/Create
