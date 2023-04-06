@@ -11,16 +11,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DocumentTypeID)
+            @Html.DisplayNameFor(model => model.DocumentType.DocumentTypeName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DocumentTypeID)
+            @Html.DisplayFor(model => model.DocumentType.DocumentTypeName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LlcID)
+            @Html.DisplayNameFor(model => model.Llc.LlcName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LlcID)
+            @Html.DisplayFor(model => model.Llc.LlcName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CniPosRequestorUserID)
@@ -47,10 +47,10 @@
             @Html.DisplayFor(model => model.VersionNumber)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DocumentStatusID)
+            @Html.DisplayNameFor(model => model.DocumentStatus.DocumentStatusName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DocumentStatusID)
+            @Html.DisplayFor(model => model.DocumentStatus.DocumentStatusName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DraftedByUserID)

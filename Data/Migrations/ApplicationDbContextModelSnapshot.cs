@@ -57,13 +57,18 @@ namespace CapstoneProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ThirdParty")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VersionNumber")
                         .HasColumnType("int");
 
                     b.HasKey("DocumentID");
+
+                    b.HasIndex("DocumentStatusID");
+
+                    b.HasIndex("DocumentTypeID");
+
+                    b.HasIndex("LlcID");
 
                     b.ToTable("Document");
                 });
@@ -374,6 +379,33 @@ namespace CapstoneProject.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Capstone.Models.Document", b =>
+                {
+                    b.HasOne("Capstone.Models.DocumentStatus", "DocumentStatus")
+                        .WithMany()
+                        .HasForeignKey("DocumentStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Capstone.Models.DocumentType", "DocumentType")
+                        .WithMany()
+                        .HasForeignKey("DocumentTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Capstone.Models.Llc", "Llc")
+                        .WithMany()
+                        .HasForeignKey("LlcID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentStatus");
+
+                    b.Navigation("DocumentType");
+
+                    b.Navigation("Llc");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
