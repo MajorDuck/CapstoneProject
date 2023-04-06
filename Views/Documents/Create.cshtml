@@ -4,13 +4,6 @@
     ViewData["Title"] = "Create";
 }
 
-@{
-    int i = 0;
-    foreach (var document_type in Model.DocumentTypes)
-    {
-        Console.WriteLine($"text: {document_type.Text} value: {document_type.Value}");
-    }
-}
 <h1>Create</h1>
 
 <h4>Document</h4>
@@ -24,7 +17,7 @@
                 <select asp-for="Document.DocumentTypeID"
                         asp-items="@Model.DocumentTypes"
                         class="form-control">
-                    <option>Document type</option>
+                    <option disabled selected hidden>Select Document Type</option>
                 </select>
                 <span asp-validation-for="Document.DocumentTypeID" class="text-danger"></span>
             </div>
@@ -33,7 +26,7 @@
                 <select asp-for="Document.LlcID"
                         asp-items="@Model.Llcs"
                         class="form-control">
-                    <option>Llc</option>
+                    <option disabled selected hidden>Select LLC</option>
                 </select>
                 <span asp-validation-for="Document.LlcID" class="text-danger"></span>
             </div>
@@ -62,7 +55,7 @@
                 <select asp-for="Document.DocumentStatusID"
                         asp-items="@Model.DocumentStatuses"
                         class="form-control">
-                    <option>Document status</option>
+                    <option disabled selected hidden>Select Document Status</option>
                 </select>
                 <span asp-validation-for="Document.DocumentStatusID" class="text-danger"></span>
             </div>

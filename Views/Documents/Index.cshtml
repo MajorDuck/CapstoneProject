@@ -201,10 +201,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DocumentTypeID)
+                @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LlcID)
+                @Html.DisplayFor(modelItem => item.Llc.LlcName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CniPosRequestorUserID)
@@ -219,7 +219,7 @@
                 @Html.DisplayFor(modelItem => item.VersionNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DocumentStatusID)
+                @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DraftedByUserID)

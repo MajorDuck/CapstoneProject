@@ -24,7 +24,8 @@ namespace CapstoneProject.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Document != null ? 
-                          View(await _context.Document.ToListAsync()) :
+                          View(await _context.Document.Include(d => d.DocumentType).Include(d => d.DocumentStatus)
+                          .Include(d => d.Llc).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Document'  is null.");
         }
 
@@ -36,8 +37,8 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var document = await _context.Document
-                .FirstOrDefaultAsync(m => m.DocumentID == id);
+            var document = await _context.Document.Include(d => d.DocumentType).Include(d => d.DocumentStatus)
+                .Include(d => d.Llc).FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
                 return NotFound();
@@ -82,13 +83,20 @@ namespace CapstoneProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
         {
-            if (ModelState.IsValid)
+            var errors = ModelState.Values.SelectMany(e => e.Errors);
+            foreach (var error in errors) {
+                Console.WriteLine($"\n\n\n{error.ErrorMessage}\n\n\n");
+            }
+            _context.Add(document);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            /*if (ModelState.IsValid)
             {
                 _context.Add(document);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(document);
+            return View(new DocumentFormViewModel());*/
         }
 
         // GET: Documents/Edit/5
@@ -99,12 +107,38 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var document = await _context.Document.FindAsync(id);
-            if (document == null)
+            var document_statuses = _context.DocumentStatus.Select(a => new SelectListItem()
             {
+                Value = a.DocumentStatusID.ToString(),
+                Text = a.DocumentStatusName
+            }).ToList();
+
+            var document_types = _context.DocumentType.Select(a => new SelectListItem()
+            {
+                Value = a.DocumentTypeID.ToString(),
+                Text = a.DocumentTypeName
+            }).ToList();
+
+            var llcs = _context.Llc.Select(a => new SelectListItem()
+            {
+                Value = a.LlcID.ToString(),
+                Text = a.LlcName
+            }).ToList();
+
+            var document = await _context.Document.FindAsync(id);
+            if (document == null) {
                 return NotFound();
             }
-            return View(document);
+
+            var viewModel = new DocumentFormViewModel
+            {
+                DocumentStatuses = document_statuses,
+                DocumentTypes = document_types,
+                Llcs = llcs,
+                Document = document
+            };
+
+            return View(viewModel);
         }
 
         // POST: Documents/Edit/5
@@ -118,8 +152,25 @@ namespace CapstoneProject.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            try
+            {
+                _context.Update(document);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DocumentExists(document.DocumentID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+            
+            /*if (ModelState.IsValid)
             {
                 try
                 {
@@ -139,7 +190,7 @@ namespace CapstoneProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(document);
+            return View(document);*/
         }
 
         // GET: Documents/Delete/5
