@@ -12,7 +12,8 @@ using System.Data;
 
 namespace CapstoneProject.Controllers
 {
-    public class DocumentTypesController : Controller
+	[Authorize(Roles = "Administrators")]
+	public class DocumentTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -22,7 +23,6 @@ namespace CapstoneProject.Controllers
 		}
 
 		// GET: DocumentTypes
-		[Authorize(Roles = "Administrators,ReadOnlyUsers")]
 		public async Task<IActionResult> Index()
         {
               return _context.DocumentType != null ? 
@@ -31,7 +31,6 @@ namespace CapstoneProject.Controllers
         }
 
 		// GET: DocumentTypes/Details/5
-		[Authorize(Roles = "Administrators,ReadOnlyUsers")]
 		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.DocumentType == null)
@@ -50,7 +49,6 @@ namespace CapstoneProject.Controllers
         }
 
 		// GET: DocumentTypes/Create
-		[Authorize(Roles = "Administrators")]
 		public IActionResult Create()
         {
             return View();
@@ -61,7 +59,6 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> Create([Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
         {
             if (ModelState.IsValid)
@@ -74,7 +71,6 @@ namespace CapstoneProject.Controllers
         }
 
 		// GET: DocumentTypes/Edit/5
-		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.DocumentType == null)
@@ -95,7 +91,6 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> Edit(int id, [Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
         {
             if (id != documentType.DocumentTypeID)
@@ -127,7 +122,6 @@ namespace CapstoneProject.Controllers
         }
 
 		// GET: DocumentTypes/Delete/5
-		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.DocumentType == null)
@@ -148,7 +142,6 @@ namespace CapstoneProject.Controllers
         // POST: DocumentTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.DocumentType == null)
