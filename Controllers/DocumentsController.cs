@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using CapstoneProject.Data;
 using CapstoneProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapstoneProject.Controllers
 {
@@ -20,8 +21,9 @@ namespace CapstoneProject.Controllers
             _context = context;
         }
 
-        // GET: Documents
-        public async Task<IActionResult> Index()
+		// GET: Documents
+		[Authorize(Roles = "Administrators,ReadOnlyUsers")]
+		public async Task<IActionResult> Index()
         {
               return _context.Document != null ? 
                           View(await _context.Document.Include(d => d.DocumentType).Include(d => d.DocumentStatus)
@@ -30,6 +32,7 @@ namespace CapstoneProject.Controllers
         }
 
         // GET: Documents/Details/5
+        [Authorize(Roles = "Administrators,ReadOnlyUsers")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Document == null)
@@ -47,8 +50,9 @@ namespace CapstoneProject.Controllers
             return View(document);
         }
 
-        // GET: Documents/Create
-        public IActionResult Create()
+		// GET: Documents/Create
+		[Authorize(Roles = "Administrators")]
+		public IActionResult Create()
         {
             var document_statuses = _context.DocumentStatus.Select(a => new SelectListItem()
             {
@@ -81,7 +85,8 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
+		[Authorize(Roles = "Administrators")]
+		public async Task<IActionResult> Create([Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
         {
             var errors = ModelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors) {
@@ -99,8 +104,9 @@ namespace CapstoneProject.Controllers
             return View(new DocumentFormViewModel());*/
         }
 
-        // GET: Documents/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: Documents/Edit/5
+		[Authorize(Roles = "Administrators")]
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Document == null)
             {
@@ -146,7 +152,8 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
+		[Authorize(Roles = "Administrators")]
+		public async Task<IActionResult> Edit(int id, [Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
         {
             if (id != document.DocumentID)
             {
@@ -193,8 +200,9 @@ namespace CapstoneProject.Controllers
             return View(document);*/
         }
 
-        // GET: Documents/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Documents/Delete/5
+		[Authorize(Roles = "Administrators")]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Document == null)
             {
@@ -214,7 +222,8 @@ namespace CapstoneProject.Controllers
         // POST: Documents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		[Authorize(Roles = "Administrators")]
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Document == null)
             {
