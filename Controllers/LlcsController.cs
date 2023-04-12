@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using CapstoneProject.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CapstoneProject.Controllers
 {
-    public class LlcsController : Controller
+	[Authorize(Roles = "Administrators")]
+	public class LlcsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
