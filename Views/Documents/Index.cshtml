@@ -161,7 +161,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 <!--Index Table-->
-<table class="table">
+<table class="table" id="document-table">
     <thead>
         <tr>
             <th>
@@ -239,3 +239,18 @@
 }
     </tbody>
 </table>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#document-table").DataTable({
+
+            });
+        });
+    </script>
+}
