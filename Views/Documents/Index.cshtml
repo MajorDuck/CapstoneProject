@@ -249,7 +249,11 @@
     <script>
         $(document).ready(function () {
             $("#document-table").DataTable({
-
+                'columnDefs': [{
+                    'targets': [9,10],
+                    'orderable': false,
+                    'searchable': false,
+                }]
             });
         });
     </script>
