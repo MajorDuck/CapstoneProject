@@ -25,3 +25,27 @@ td {
     padding-right: 150px;
     white-space: nowrap;
 }
+
+#Red {
+    background-color: lightcoral;
+}
+
+#Orange {
+    background-color: lightsalmon;
+}
+
+#Yellow {
+    background-color: #ffff4b;
+}
+
+#Green {
+    background-color: lightgreen;
+}
+
+#Blue {
+    background-color: lightskyblue;
+}
+
+#Purple {
+    background-color: plum;
+}

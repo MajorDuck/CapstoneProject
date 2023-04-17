@@ -198,8 +198,9 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model) {
+            var backgroundColor = item.DocumentStatus.DocumentStatusColor;
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
             </td>
@@ -218,7 +219,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VersionNumber)
             </td>
-            <td>
+            <td id="@backgroundColor">
                 @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
             </td>
             <td>
