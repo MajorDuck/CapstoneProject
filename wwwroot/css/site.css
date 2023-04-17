@@ -9,16 +9,27 @@ html {
     font-size: 14px;
     position: relative;
     min-height: 100%;
-    padding-right: 500px;
 }
 
 body {
     font-family: Arial, Arial, sans-serif;
     margin-bottom: 60px;
+    width: 100%;
+}
+
+.navbar-collapse {
+    position: absolute;
+    right: 0px;
+}
+
+.container {
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 table {
     font-family: Arial, Arial, sans-serif;
+    font-size: 12px;
 }
 
 td {
