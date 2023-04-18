@@ -15,7 +15,7 @@
         <tr>
             <td>
                 <!--'nearing completion' Table-->
-                <table class="table">
+                <table class="table" id="overview-table">
                     <thead>
                         <tr>
                             <th>
@@ -39,52 +39,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Subcontract</td>
-                            <td>Chickasaw Strategic Pointe</td>
-                            <td>1709</td>
-                            <td>Drafting</td>
-                            <td>3/20/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Subcontract Mod</td>
-                            <td>DIGITALiBiz</td>
-                            <td>1732</td>
-                            <td>Approval</td>
-                            <td>2/27/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>ATP</td>
-                            <td>Chickasaw Business Solutions</td>
-                            <td>1716</td>
-                            <td>Filing</td>
-                            <td>2/15/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Task Order</td>
-                            <td>Technology trends group</td>
-                            <td>1699</td>
-                            <td>Negotation</td>
-                            <td>2/19/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Task Order Mod</td>
-                            <td>Chickasaw management services</td>
-                            <td>1689</td>
-                            <td>Signature</td>
-                            <td>3/03/2023</td>
-                            <td>link</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Llc.LlcName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CniContractNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
-            </td>
             <td>
                 <!--'potentially neglected' Table-->
-                <table class="table">
+                <table class="table" id="overview-table">
                     <thead>
                         <tr>
                             <th>
@@ -108,46 +90,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>ATP</td>
-                            <td>Chickasaw Defense Group</td>
-                            <td>1599</td>
-                            <td>Signature</td>
-                            <td>2/02/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Task Order</td>
-                            <td>Chickasaw Defense Logistics</td>
-                            <td>1614</td>
-                            <td>Signature</td>
-                            <td>1/26/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Subcontract</td>
-                            <td>CNI Advantage</td>
-                            <td>1647</td>
-                            <td>Signature</td>
-                            <td>1/22/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Subcontract Mod</td>
-                            <td>Filtra-Systems Company</td>
-                            <td>1622</td>
-                            <td>Signature</td>
-                            <td>1/18/2023</td>
-                            <td>link</td>
-                        </tr>
-                        <tr>
-                            <td>Task Order Mod</td>
-                            <td>IPKeys</td>
-                            <td>1650</td>
-                            <td>Signature</td>
-                            <td>1/06/2023</td>
-                            <td>link</td>
-                        </tr>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.Llc.LlcName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.CniContractNumber)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                            </tr>
+                            }
                     </tbody>
                 </table>
             </td>
@@ -155,13 +120,16 @@
     </tbody>
 </table>
 
+<div style="height: 50px;"></div>
+
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <!--Index Table-->
-<table class="table" id="document-table">
+<table class="table display" id="document-table">
     <thead>
         <tr>
             <th>
@@ -198,8 +166,9 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model) {
+            var backgroundColor = item.DocumentStatus.DocumentStatusColor;
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
             </td>
@@ -218,7 +187,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VersionNumber)
             </td>
-            <td>
+            <td id="@backgroundColor">
                 @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
             </td>
             <td>
@@ -249,7 +218,11 @@
     <script>
         $(document).ready(function () {
             $("#document-table").DataTable({
-
+                'columnDefs': [{
+                    'targets': [9,10],
+                    'orderable': false,
+                    'searchable': false,
+                }]
             });
         });
     </script>
