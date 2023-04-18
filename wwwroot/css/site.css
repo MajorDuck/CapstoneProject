@@ -9,19 +9,54 @@ html {
     font-size: 14px;
     position: relative;
     min-height: 100%;
-    padding-right: 500px;
 }
 
 body {
     font-family: Arial, Arial, sans-serif;
     margin-bottom: 60px;
+    width: 100%;
+}
+
+.navbar-collapse {
+    position: absolute;
+    right: 0px;
+}
+
+.container {
+    margin-right: 15px;
+    margin-left: 15px;
 }
 
 table {
     font-family: Arial, Arial, sans-serif;
+    font-size: 12px;
 }
 
 td {
     padding-right: 150px;
     white-space: nowrap;
+}
+
+#Red {
+    background-color: lightcoral;
+}
+
+#Orange {
+    background-color: lightsalmon;
+}
+
+#Yellow {
+    background-color: #ffff4b;
+}
+
+#Green {
+    background-color: lightgreen;
+}
+
+#Blue {
+    background-color: lightskyblue;
+}
+
+#Purple {
+    background-color: plum;
 }
