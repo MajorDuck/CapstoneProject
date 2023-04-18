@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapstoneProject.Data;
 using CapstoneProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using CapstoneProject.ViewModels;
 
 namespace CapstoneProject.Controllers
 {
@@ -25,9 +26,12 @@ namespace CapstoneProject.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.UserLlc != null ? 
-                          View(await _context.UserLlc.ToListAsync()) :
+                          View(await _context.UserLlc
+                            .Include(d => d.Llc)
+                            .Include(d=> d.User)
+                            .ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.UserLlc'  is null.");
-        }
+		}
 
         // GET: UserLlcs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -38,6 +42,8 @@ namespace CapstoneProject.Controllers
             }
 
             var userLlc = await _context.UserLlc
+                .Include(d => d.Llc)
+                .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.UserLlcId == id);
             if (userLlc == null)
             {
@@ -50,7 +56,26 @@ namespace CapstoneProject.Controllers
         // GET: UserLlcs/Create
         public IActionResult Create()
         {
-            return View();
+
+            var llcs = _context.Llc.Select(a => new SelectListItem()
+            {
+                Value = a.LlcID.ToString(),
+                Text = a.LlcName
+            }).ToList();
+
+            var users = _context.Users.Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.Email
+            }).ToList();
+
+            var viewModel = new UserLlcViewModel
+            {
+                Users = users,
+                Llcs = llcs
+            };
+
+            return View(viewModel);
         }
 
         // POST: UserLlcs/Create
@@ -60,13 +85,22 @@ namespace CapstoneProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UserLlcId,UserId,LlcId")] UserLlc userLlc)
         {
+            var errors = ModelState.Values.SelectMany(e => e.Errors);
+            foreach (var error in errors)
+            {
+                Console.WriteLine($"\n\n\n{error.ErrorMessage}\n\n\n");
+            }
+            _context.Add(userLlc);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            /*
             if (ModelState.IsValid)
             {
                 _context.Add(userLlc);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userLlc);
+            return View(userLlc);*/
         }
 
         // GET: UserLlcs/Edit/5
@@ -82,7 +116,33 @@ namespace CapstoneProject.Controllers
             {
                 return NotFound();
             }
-            return View(userLlc);
+
+            var llcs = _context.Llc.Select(a => new SelectListItem()
+            {
+                Value = a.LlcID.ToString(),
+                Text = a.LlcName
+            }).ToList();
+
+            var users = _context.Users.Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.Email
+            }).ToList();
+
+            var userllc = await _context.UserLlc.FindAsync(id);
+            if (userllc == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new UserLlcViewModel
+            {
+                UserLlc = userllc,
+                Users = users,
+                Llcs = llcs
+            };
+
+            return View(viewModel);
         }
 
         // POST: UserLlcs/Edit/5
@@ -96,7 +156,25 @@ namespace CapstoneProject.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Update(userLlc);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserLlcExists(userLlc.UserLlcId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
 
+            /*
             if (ModelState.IsValid)
             {
                 try
@@ -118,6 +196,7 @@ namespace CapstoneProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(userLlc);
+            */
         }
 
         // GET: UserLlcs/Delete/5
@@ -129,6 +208,8 @@ namespace CapstoneProject.Controllers
             }
 
             var userLlc = await _context.UserLlc
+                .Include(d => d.User)
+                .Include(d => d.Llc)
                 .FirstOrDefaultAsync(m => m.UserLlcId == id);
             if (userLlc == null)
             {
