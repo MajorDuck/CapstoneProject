@@ -27,8 +27,8 @@ namespace CapstoneProject.Controllers
         {
               return _context.UserLlc != null ? 
                           View(await _context.UserLlc
-                            .Include(d => d.Llc)
-                            .Include(d=> d.User)
+                            .Include(d => d.Llc) // Included to get LlcName
+                            .Include(d=> d.User) // Included to get Email
                             .ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.UserLlc'  is null.");
 		}
@@ -42,8 +42,8 @@ namespace CapstoneProject.Controllers
             }
 
             var userLlc = await _context.UserLlc
-                .Include(d => d.Llc)
-                .Include(d => d.User)
+                .Include(d => d.Llc) // Included to get LlcName
+                .Include(d => d.User) // Included to get Email
                 .FirstOrDefaultAsync(m => m.UserLlcId == id);
             if (userLlc == null)
             {
@@ -57,19 +57,19 @@ namespace CapstoneProject.Controllers
         public IActionResult Create()
         {
 
-            var llcs = _context.Llc.Select(a => new SelectListItem()
+            var llcs = _context.Llc.Select(a => new SelectListItem() // Get list of each LlcId and LlcName pair
             {
                 Value = a.LlcID.ToString(),
                 Text = a.LlcName
             }).ToList();
 
-            var users = _context.Users.Select(a => new SelectListItem()
+            var users = _context.Users.Select(a => new SelectListItem() // Get list of each user Id and Email pair
             {
                 Value = a.Id.ToString(),
                 Text = a.Email
             }).ToList();
 
-            var viewModel = new UserLlcViewModel
+            var viewModel = new UserLlcViewModel // Combine lists to send
             {
                 Users = users,
                 Llcs = llcs
@@ -117,13 +117,13 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var llcs = _context.Llc.Select(a => new SelectListItem()
+            var llcs = _context.Llc.Select(a => new SelectListItem() // Get list of each LlcId and LlcName pair
             {
                 Value = a.LlcID.ToString(),
                 Text = a.LlcName
             }).ToList();
 
-            var users = _context.Users.Select(a => new SelectListItem()
+            var users = _context.Users.Select(a => new SelectListItem() // Get list of each user Id and Email pair
             {
                 Value = a.Id.ToString(),
                 Text = a.Email
@@ -135,7 +135,7 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var viewModel = new UserLlcViewModel
+            var viewModel = new UserLlcViewModel // Combines lists to send
             {
                 UserLlc = userllc,
                 Users = users,
@@ -208,8 +208,8 @@ namespace CapstoneProject.Controllers
             }
 
             var userLlc = await _context.UserLlc
-                .Include(d => d.User)
-                .Include(d => d.Llc)
+                .Include(d => d.User) // Included to get Email
+                .Include(d => d.Llc) // Included to get LlcName
                 .FirstOrDefaultAsync(m => m.UserLlcId == id);
             if (userLlc == null)
             {
