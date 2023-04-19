@@ -1,9 +1,11 @@
-﻿namespace Capstone.Models
+﻿using System.ComponentModel;
+
+namespace Capstone.Models
 {
 	public class Llc
 	{
 		public int LlcID { get; set; }
-
-		public string LlcName { get; set; }
+        [DisplayName("Name")]
+        public string LlcName { get; set; }
 	}
 }
