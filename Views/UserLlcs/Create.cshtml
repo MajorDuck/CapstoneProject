@@ -13,8 +13,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UserLlc.UserId" class="control-label></label"></label>
-                <select asp-for="UserLlc.UserId"
+                <label asp-for="UserLlc.UserEmail" class="control-label></label"></label>
+                <select asp-for="UserLlc.UserEmail"
                     asp-items="@Model.Users"
                     class="form-control">
                     <option disabled selected hidden>Select User by Email</option>

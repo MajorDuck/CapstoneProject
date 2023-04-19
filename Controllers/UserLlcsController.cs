@@ -83,7 +83,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserLlcId,UserId,LlcId")] UserLlc userLlc)
+        public async Task<IActionResult> Create([Bind("UserLlcId,UserEmail,LlcId")] UserLlc userLlc)
         {
             var errors = ModelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors)
@@ -150,7 +150,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserLlcId,UserId,LlcId")] UserLlc userLlc)
+        public async Task<IActionResult> Edit(int id, [Bind("UserLlcId,UserEmail,LlcId")] UserLlc userLlc)
         {
             if (id != userLlc.UserLlcId)
             {
