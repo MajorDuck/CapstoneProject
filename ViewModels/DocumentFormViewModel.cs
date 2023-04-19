@@ -9,5 +9,6 @@ namespace CapstoneProject.ViewModels
         public List<SelectListItem> DocumentTypes { get; set; }
         public List<SelectListItem> DocumentStatuses { get; set; }
         public List<SelectListItem> Llcs { get; set; }
+        public List<SelectListItem> CniPosRequestorUserId { get; set; }
     }
 }

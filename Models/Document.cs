@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
@@ -13,9 +14,10 @@ namespace Capstone.Models
 		public Llc Llc { get; set; }
 		public int LlcID { get; set; }
 
-		public int CniPosRequestorUserID { get; set; }
+		public IdentityUser CniPosRequestorUser { get; set; }
+        public string CniPosRequestorUserID { get; set; }
 
-		public string CniContractNumber { get; set; }
+        public string CniContractNumber { get; set; }
 		public string? ThirdParty { get; set; }
 
 		public int VersionNumber { get; set; }
@@ -24,6 +26,7 @@ namespace Capstone.Models
 
 		public int DraftedByUserID { get; set; }
 
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}")]
 		public DateTime DateLastUpdated { get; set; }
 
 		public string LinkToDocument { get; set; }

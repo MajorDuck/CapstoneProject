@@ -4,6 +4,7 @@ using CapstoneProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230418234315_dropuserrole")]
+    partial class dropuserrole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,8 @@ namespace CapstoneProject.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CniPosRequestorUserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CniPosRequestorUserID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateLastUpdated")
                         .HasColumnType("datetime2");
@@ -64,8 +65,6 @@ namespace CapstoneProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DocumentID");
-
-                    b.HasIndex("CniPosRequestorUserID");
 
                     b.HasIndex("DocumentStatusID");
 
@@ -142,11 +141,8 @@ namespace CapstoneProject.Data.Migrations
                     b.Property<int>("LlcId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserLlcId");
@@ -362,12 +358,6 @@ namespace CapstoneProject.Data.Migrations
 
             modelBuilder.Entity("Capstone.Models.Document", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CniPosRequestorUser")
-                        .WithMany()
-                        .HasForeignKey("CniPosRequestorUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Capstone.Models.DocumentStatus", "DocumentStatus")
                         .WithMany()
                         .HasForeignKey("DocumentStatusID")
@@ -386,8 +376,6 @@ namespace CapstoneProject.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CniPosRequestorUser");
-
                     b.Navigation("DocumentStatus");
 
                     b.Navigation("DocumentType");
@@ -405,7 +393,9 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Llc");
 

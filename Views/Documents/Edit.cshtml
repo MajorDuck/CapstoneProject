@@ -33,7 +33,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Document.CniPosRequestorUserID" class="control-label"></label>
-                <input asp-for="Document.CniPosRequestorUserID" class="form-control" />
+                <select asp-for="Document.CniPosRequestorUserID"
+                        asp-items="@Model.CniPosRequestorUserId"
+                        class="form-control">
+                    <option disabled selected hidden>Select POS Requestor</option>
+                </select>
                 <span asp-validation-for="Document.CniPosRequestorUserID" class="text-danger"></span>
             </div>
             <div class="form-group">
