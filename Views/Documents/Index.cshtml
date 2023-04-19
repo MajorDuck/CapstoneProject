@@ -176,9 +176,6 @@
                 @Html.DisplayFor(modelItem => item.Llc.LlcName)
             </td>
             <td>
-                    @{
-                        //Console.WriteLine($"{item.User.Id}");
-                    }
                 @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
             </td>
             <td>
@@ -190,7 +187,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VersionNumber)
             </td>
-            <td id="@backgroundColor">
+                <td style="background-color:@item.DocumentStatus.DocumentStatusColor;">
                 @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
             </td>
             <td>
