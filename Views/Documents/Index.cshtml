@@ -49,7 +49,7 @@
                                     @Html.DisplayFor(modelItem => item.Llc.LlcName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CniContractNumber)
+                                    @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
@@ -100,7 +100,7 @@
                                         @Html.DisplayFor(modelItem => item.Llc.LlcName)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.CniContractNumber)
+                                        @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
                                 </td>
                                 <td>
                                         @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
@@ -139,7 +139,7 @@
                 @Html.DisplayNameFor(model => model.LlcID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User.Email)
+                @Html.DisplayNameFor(model => model.CniPosRequestorUser.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CniContractNumber)
@@ -176,7 +176,10 @@
                 @Html.DisplayFor(modelItem => item.Llc.LlcName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
+                    @{
+                        //Console.WriteLine($"{item.User.Id}");
+                    }
+                @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CniContractNumber)

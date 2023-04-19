@@ -30,7 +30,7 @@ namespace CapstoneProject.Controllers
                     .Include(d => d.DocumentType)
                     .Include(d => d.DocumentStatus)
                     .Include(d => d.Llc)
-                    .Include(d => d.User)
+                    .Include(d => d.CniPosRequestorUser)
                     .ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Document'  is null.");
         }
@@ -48,7 +48,7 @@ namespace CapstoneProject.Controllers
                 .Include(d => d.DocumentType)
                 .Include(d => d.DocumentStatus)
                 .Include(d => d.Llc)
-                .Include(d => d.User)
+                .Include(d => d.CniPosRequestorUser)
                 .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
@@ -235,7 +235,7 @@ namespace CapstoneProject.Controllers
                 .Include(d => d.DocumentType)
                 .Include(d => d.DocumentStatus)
                 .Include(d => d.Llc)
-                .Include(d => d.User)
+                .Include(d => d.CniPosRequestorUser)
                 .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {

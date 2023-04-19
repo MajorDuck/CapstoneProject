@@ -76,7 +76,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Document");
+                    b.ToTable("Document", (string)null);
                 });
 
             modelBuilder.Entity("Capstone.Models.DocumentStatus", b =>
@@ -97,7 +97,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasKey("DocumentStatusID");
 
-                    b.ToTable("DocumentStatus");
+                    b.ToTable("DocumentStatus", (string)null);
                 });
 
             modelBuilder.Entity("Capstone.Models.DocumentType", b =>
@@ -114,7 +114,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasKey("DocumentTypeID");
 
-                    b.ToTable("DocumentType");
+                    b.ToTable("DocumentType", (string)null);
                 });
 
             modelBuilder.Entity("Capstone.Models.Llc", b =>
@@ -131,7 +131,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasKey("LlcID");
 
-                    b.ToTable("Llc");
+                    b.ToTable("Llc", (string)null);
                 });
 
             modelBuilder.Entity("CapstoneProject.Models.UserLlc", b =>
@@ -158,7 +158,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLlc");
+                    b.ToTable("UserLlc", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

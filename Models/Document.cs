@@ -14,10 +14,10 @@ namespace Capstone.Models
 		public Llc Llc { get; set; }
 		public int LlcID { get; set; }
 
-		public string CniPosRequestorUserID { get; set; }
-		public IdentityUser User { get; set; }
+		public IdentityUser CniPosRequestorUser { get; set; }
+        public string CniPosRequestorUserID { get; set; }
 
-		public string CniContractNumber { get; set; }
+        public string CniContractNumber { get; set; }
 		public string? ThirdParty { get; set; }
 
 		public int VersionNumber { get; set; }
