@@ -26,6 +26,7 @@ namespace Capstone.Models
 
 		public int DraftedByUserID { get; set; }
 
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}")]
 		public DateTime DateLastUpdated { get; set; }
 
 		public string LinkToDocument { get; set; }
