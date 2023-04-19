@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
@@ -13,7 +14,8 @@ namespace Capstone.Models
 		public Llc Llc { get; set; }
 		public int LlcID { get; set; }
 
-		public int CniPosRequestorUserID { get; set; }
+		public string CniPosRequestorUserID { get; set; }
+		public IdentityUser User { get; set; }
 
 		public string CniContractNumber { get; set; }
 		public string? ThirdParty { get; set; }

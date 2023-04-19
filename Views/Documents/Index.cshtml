@@ -139,7 +139,7 @@
                 @Html.DisplayNameFor(model => model.LlcID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CniPosRequestorUserID)
+                @Html.DisplayNameFor(model => model.User.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CniContractNumber)
@@ -176,7 +176,7 @@
                 @Html.DisplayFor(modelItem => item.Llc.LlcName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CniPosRequestorUserID)
+                @Html.DisplayFor(modelItem => item.User.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CniContractNumber)

@@ -25,9 +25,13 @@ namespace CapstoneProject.Controllers
 		[Authorize(Roles = "Administrators,ReadOnlyUsers")]
 		public async Task<IActionResult> Index()
         {
-              return _context.Document != null ? 
-                          View(await _context.Document.Include(d => d.DocumentType).Include(d => d.DocumentStatus)
-                          .Include(d => d.Llc).ToListAsync()) :
+            return _context.Document != null ? 
+                View(await _context.Document
+                    .Include(d => d.DocumentType)
+                    .Include(d => d.DocumentStatus)
+                    .Include(d => d.Llc)
+                    .Include(d => d.User)
+                    .ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Document'  is null.");
         }
 
@@ -40,8 +44,12 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var document = await _context.Document.Include(d => d.DocumentType).Include(d => d.DocumentStatus)
-                .Include(d => d.Llc).FirstOrDefaultAsync(m => m.DocumentID == id);
+            var document = await _context.Document
+                .Include(d => d.DocumentType)
+                .Include(d => d.DocumentStatus)
+                .Include(d => d.Llc)
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
                 return NotFound();
@@ -71,11 +79,18 @@ namespace CapstoneProject.Controllers
                 Text = a.LlcName
             }).ToList();
 
+            var posrequestors = _context.Users.Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.Email
+            }).ToList();
+
             var viewModel = new DocumentFormViewModel
             {
                 DocumentStatuses = document_statuses,
                 DocumentTypes = document_types,
-                Llcs = llcs
+                Llcs = llcs,
+                CniPosRequestorUserId = posrequestors
             };
             return View(viewModel);
         }
@@ -131,6 +146,12 @@ namespace CapstoneProject.Controllers
                 Text = a.LlcName
             }).ToList();
 
+            var posrequestors = _context.Users.Select(a => new SelectListItem()
+            {
+                Value = a.Id.ToString(),
+                Text = a.Email
+            }).ToList();
+
             var document = await _context.Document.FindAsync(id);
             if (document == null) {
                 return NotFound();
@@ -141,6 +162,7 @@ namespace CapstoneProject.Controllers
                 DocumentStatuses = document_statuses,
                 DocumentTypes = document_types,
                 Llcs = llcs,
+                CniPosRequestorUserId = posrequestors,
                 Document = document
             };
 
@@ -210,6 +232,10 @@ namespace CapstoneProject.Controllers
             }
 
             var document = await _context.Document
+                .Include(d => d.DocumentType)
+                .Include(d => d.DocumentStatus)
+                .Include(d => d.Llc)
+                .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
