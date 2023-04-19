@@ -4,6 +4,7 @@ using CapstoneProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230417031452_userllcsetup")]
+    partial class userllcsetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,8 @@ namespace CapstoneProject.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CniPosRequestorUserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CniPosRequestorUserID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateLastUpdated")
                         .HasColumnType("datetime2");
@@ -64,8 +65,6 @@ namespace CapstoneProject.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DocumentID");
-
-                    b.HasIndex("CniPosRequestorUserID");
 
                     b.HasIndex("DocumentStatusID");
 
@@ -131,6 +130,57 @@ namespace CapstoneProject.Data.Migrations
                     b.ToTable("Llc");
                 });
 
+            modelBuilder.Entity("Capstone.Models.Role", b =>
+                {
+                    b.Property<int>("RoleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"), 1L, 1);
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEtcEtc")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleID");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("Capstone.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"), 1L, 1);
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("CapstoneProject.Models.UserLlc", b =>
                 {
                     b.Property<int>("UserLlcId")
@@ -142,18 +192,11 @@ namespace CapstoneProject.Data.Migrations
                     b.Property<int>("LlcId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserEmail")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UserLlcId");
-
-                    b.HasIndex("LlcId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserLlc");
                 });
@@ -362,12 +405,6 @@ namespace CapstoneProject.Data.Migrations
 
             modelBuilder.Entity("Capstone.Models.Document", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CniPosRequestorUser")
-                        .WithMany()
-                        .HasForeignKey("CniPosRequestorUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Capstone.Models.DocumentStatus", "DocumentStatus")
                         .WithMany()
                         .HasForeignKey("DocumentStatusID")
@@ -386,30 +423,11 @@ namespace CapstoneProject.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CniPosRequestorUser");
-
                     b.Navigation("DocumentStatus");
 
                     b.Navigation("DocumentType");
 
                     b.Navigation("Llc");
-                });
-
-            modelBuilder.Entity("CapstoneProject.Models.UserLlc", b =>
-                {
-                    b.HasOne("Capstone.Models.Llc", "Llc")
-                        .WithMany()
-                        .HasForeignKey("LlcId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Llc");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

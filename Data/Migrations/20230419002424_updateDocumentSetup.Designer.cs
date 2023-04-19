@@ -4,6 +4,7 @@ using CapstoneProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapstoneProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230419002424_updateDocumentSetup")]
+    partial class updateDocumentSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace CapstoneProject.Data.Migrations
 
                     b.Property<string>("CniPosRequestorUserID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateLastUpdated")
                         .HasColumnType("datetime2");
@@ -60,18 +62,21 @@ namespace CapstoneProject.Data.Migrations
                     b.Property<string>("ThirdParty")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("VersionNumber")
                         .HasColumnType("int");
 
                     b.HasKey("DocumentID");
-
-                    b.HasIndex("CniPosRequestorUserID");
 
                     b.HasIndex("DocumentStatusID");
 
                     b.HasIndex("DocumentTypeID");
 
                     b.HasIndex("LlcID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Document");
                 });
@@ -362,12 +367,6 @@ namespace CapstoneProject.Data.Migrations
 
             modelBuilder.Entity("Capstone.Models.Document", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CniPosRequestorUser")
-                        .WithMany()
-                        .HasForeignKey("CniPosRequestorUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Capstone.Models.DocumentStatus", "DocumentStatus")
                         .WithMany()
                         .HasForeignKey("DocumentStatusID")
@@ -386,13 +385,17 @@ namespace CapstoneProject.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CniPosRequestorUser");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("DocumentStatus");
 
                     b.Navigation("DocumentType");
 
                     b.Navigation("Llc");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CapstoneProject.Models.UserLlc", b =>

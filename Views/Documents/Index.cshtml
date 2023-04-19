@@ -4,12 +4,132 @@
     ViewData["Title"] = "Index";
 }
 
+<h1>Overview</h1>
+
+<table>
+    <tbody>
+        <tr> <!--Table Headers-->
+            <td><h3>nearing completion</h3></td>
+            <td><h3>potentially neglected</h3></td>
+        </tr>
+        <tr>
+            <td>
+                <!--'nearing completion' Table-->
+                <table class="table" id="overview-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                CNI LLC
+                            </th>
+                            <th>
+                                Contract ID
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Last Updated
+                            </th>
+                            <th>
+                                Link
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.DocumentStatusID == 1).OrderBy(x => x.DateLastUpdated).Take(5))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Llc.LlcName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            <td>
+                <!--'potentially neglected' Table-->
+                <table class="table" id="overview-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                CNI LLC
+                            </th>
+                            <th>
+                                Contract ID
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Last Updated
+                            </th>
+                            <th>
+                                Link
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in Model.OrderBy(x => x.DateLastUpdated).Take(5))
+                            {
+                            <tr>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.Llc.LlcName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.DateLastUpdated)
+                                </td>
+                                <td>
+                                        @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                </td>
+                            </tr>
+                            }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="height: 50px;"></div>
+
+
 <h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<!--Index Table-->
+<table class="table display" id="document-table">
     <thead>
         <tr>
             <th>
@@ -19,7 +139,7 @@
                 @Html.DisplayNameFor(model => model.LlcID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CniPosRequestorUserID)
+                @Html.DisplayNameFor(model => model.CniPosRequestorUser.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CniContractNumber)
@@ -46,16 +166,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model) {
+            var backgroundColor = item.DocumentStatus.DocumentStatusColor;
+            <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DocumentTypeID)
+                @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LlcID)
+                @Html.DisplayFor(modelItem => item.Llc.LlcName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CniPosRequestorUserID)
+                    @{
+                        //Console.WriteLine($"{item.User.Id}");
+                    }
+                @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CniContractNumber)
@@ -66,8 +190,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VersionNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DocumentStatusID)
+            <td id="@backgroundColor">
+                @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DraftedByUserID)
@@ -87,3 +211,22 @@
 }
     </tbody>
 </table>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#document-table").DataTable({
+                'columnDefs': [{
+                    'targets': [9,10],
+                    'orderable': false,
+                    'searchable': false,
+                }]
+            });
+        });
+    </script>
+}

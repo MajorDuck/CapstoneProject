@@ -7,28 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using CapstoneProject.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CapstoneProject.Controllers
 {
-    public class DocumentTypesController : Controller
+	[Authorize(Roles = "Administrators")]
+	public class DocumentTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
         public DocumentTypesController(ApplicationDbContext context)
         {
-            _context = context;
-        }
+			_context = context;
+		}
 
-        // GET: DocumentTypes
-        public async Task<IActionResult> Index()
+		// GET: DocumentTypes
+		public async Task<IActionResult> Index()
         {
               return _context.DocumentType != null ? 
                           View(await _context.DocumentType.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DocumentType'  is null.");
         }
 
-        // GET: DocumentTypes/Details/5
-        public async Task<IActionResult> Details(int? id)
+		// GET: DocumentTypes/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.DocumentType == null)
             {
@@ -45,8 +48,8 @@ namespace CapstoneProject.Controllers
             return View(documentType);
         }
 
-        // GET: DocumentTypes/Create
-        public IActionResult Create()
+		// GET: DocumentTypes/Create
+		public IActionResult Create()
         {
             return View();
         }
@@ -56,7 +59,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
+		public async Task<IActionResult> Create([Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +70,8 @@ namespace CapstoneProject.Controllers
             return View(documentType);
         }
 
-        // GET: DocumentTypes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: DocumentTypes/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.DocumentType == null)
             {
@@ -88,7 +91,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
+		public async Task<IActionResult> Edit(int id, [Bind("DocumentTypeID,DocumentTypeName")] DocumentType documentType)
         {
             if (id != documentType.DocumentTypeID)
             {
@@ -118,8 +121,8 @@ namespace CapstoneProject.Controllers
             return View(documentType);
         }
 
-        // GET: DocumentTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: DocumentTypes/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.DocumentType == null)
             {
@@ -139,7 +142,7 @@ namespace CapstoneProject.Controllers
         // POST: DocumentTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.DocumentType == null)
             {

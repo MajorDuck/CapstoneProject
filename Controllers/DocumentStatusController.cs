@@ -7,28 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Models;
 using CapstoneProject.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CapstoneProject.Controllers
 {
-    public class DocumentStatusController : Controller
+	[Authorize(Roles = "Administrators")]
+	public class DocumentStatusController : Controller
     {
         private readonly ApplicationDbContext _context;
 
         public DocumentStatusController(ApplicationDbContext context)
         {
-            _context = context;
-        }
+			_context = context;
+		}
 
-        // GET: DocumentStatus
-        public async Task<IActionResult> Index()
+		// GET: DocumentStatus
+		public async Task<IActionResult> Index()
         {
               return _context.DocumentStatus != null ? 
                           View(await _context.DocumentStatus.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.DocumentStatus'  is null.");
         }
 
-        // GET: DocumentStatus/Details/5
-        public async Task<IActionResult> Details(int? id)
+		// GET: DocumentStatus/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.DocumentStatus == null)
             {
@@ -45,8 +48,8 @@ namespace CapstoneProject.Controllers
             return View(documentStatus);
         }
 
-        // GET: DocumentStatus/Create
-        public IActionResult Create()
+		// GET: DocumentStatus/Create
+		public IActionResult Create()
         {
             return View();
         }
@@ -56,7 +59,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DocumentStatusID,DocumentStatusName,DocumentStatusColor")] DocumentStatus documentStatus)
+		public async Task<IActionResult> Create([Bind("DocumentStatusID,DocumentStatusName,DocumentStatusColor")] DocumentStatus documentStatus)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +70,8 @@ namespace CapstoneProject.Controllers
             return View(documentStatus);
         }
 
-        // GET: DocumentStatus/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: DocumentStatus/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.DocumentStatus == null)
             {
@@ -88,7 +91,7 @@ namespace CapstoneProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DocumentStatusID,DocumentStatusName,DocumentStatusColor")] DocumentStatus documentStatus)
+		public async Task<IActionResult> Edit(int id, [Bind("DocumentStatusID,DocumentStatusName,DocumentStatusColor")] DocumentStatus documentStatus)
         {
             if (id != documentStatus.DocumentStatusID)
             {
@@ -118,8 +121,8 @@ namespace CapstoneProject.Controllers
             return View(documentStatus);
         }
 
-        // GET: DocumentStatus/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: DocumentStatus/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.DocumentStatus == null)
             {
@@ -139,7 +142,7 @@ namespace CapstoneProject.Controllers
         // POST: DocumentStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.DocumentStatus == null)
             {
