@@ -203,6 +203,7 @@
                 @Html.DisplayFor(modelItem => item.LinkToDocument)
             </td>
             <td>
+                    <a href="@item.LinkToDocument" target="_blank">Link</a> |
                 <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
