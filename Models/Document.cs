@@ -23,7 +23,7 @@ namespace Capstone.Models
         public string? CniContractNumber { get; set; }
         [DisplayName("Third Party")]
         public string? ThirdParty { get; set; }
-        [DisplayName("Display Name")]
+        [DisplayName("Version Number")]
         public int? VersionNumber { get; set; }
 		public DocumentStatus DocumentStatus { get; set; }
         [DisplayName("Document Status")]
