@@ -16,15 +16,15 @@ namespace Capstone.Models
         [DisplayName("LLC")]
         public int LlcID { get; set; }
 
-		public IdentityUser CniPosRequestorUser { get; set; }
+		public IdentityUser? CniPosRequestorUser { get; set; }
         [DisplayName("CNI POS Requestor")]
-        public string CniPosRequestorUserID { get; set; }
+        public string? CniPosRequestorUserID { get; set; }
         [DisplayName("CNI Contract Number")]
-        public string CniContractNumber { get; set; }
+        public string? CniContractNumber { get; set; }
         [DisplayName("Third Party")]
         public string? ThirdParty { get; set; }
         [DisplayName("Display Name")]
-        public int VersionNumber { get; set; }
+        public int? VersionNumber { get; set; }
 		public DocumentStatus DocumentStatus { get; set; }
         [DisplayName("Document Status")]
         public int DocumentStatusID { get; set; }
@@ -34,7 +34,7 @@ namespace Capstone.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}")]
 		public DateTime DateLastUpdated { get; set; }
         [DisplayName("Link")]
-        public string LinkToDocument { get; set; }
+        public string? LinkToDocument { get; set; }
 
 	}
 }
