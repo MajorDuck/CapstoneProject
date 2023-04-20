@@ -7,8 +7,8 @@ namespace CapstoneProject.Models
 	public class UserLlc
 	{
         public int UserLlcId { get; set; }
-        [DisplayName("Email")]
-        public string UserEmail { get; set; }
+        [DisplayName("User")]
+        public string UserId { get; set; }
         public IdentityUser User { get; set; } // Note: Aded after populating Controller and Views
         [DisplayName("LLC")]
         public int LlcId { get; set; }
