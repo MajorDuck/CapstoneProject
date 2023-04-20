@@ -36,5 +36,10 @@ namespace Capstone.Models
         [DisplayName("Link")]
         public string? LinkToDocument { get; set; }
 
+        public Document()
+        {
+            DateLastUpdated = DateTime.Now;
+        }
+
 	}
 }
