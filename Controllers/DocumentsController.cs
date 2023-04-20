@@ -9,6 +9,7 @@ using Capstone.Models;
 using CapstoneProject.Data;
 using CapstoneProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Drawing.Printing;
 
 namespace CapstoneProject.Controllers
 {
@@ -22,17 +23,39 @@ namespace CapstoneProject.Controllers
         }
 
 		// GET: Documents
-		[Authorize(Roles = "Administrators,ReadOnlyUsers")]
+		[Authorize]
 		public async Task<IActionResult> Index()
         {
-            return _context.Document != null ? 
-                View(await _context.Document
-                    .Include(d => d.DocumentType)
-                    .Include(d => d.DocumentStatus)
-                    .Include(d => d.Llc)
-                    .Include(d => d.CniPosRequestorUser)
-                    .ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Document'  is null.");
+            if (User.IsInRole("Administrators"))
+                return _context.Document != null ? 
+                    View(await _context.Document
+                        .Include(d => d.DocumentType)
+                        .Include(d => d.DocumentStatus)
+                        .Include(d => d.Llc)
+                        .Include(d => d.CniPosRequestorUser)
+                        .ToListAsync()) :
+                              Problem("Entity set 'ApplicationDbContext.Document'  is null.");
+
+
+            var currUserEmail = User.Identity.Name;
+            var currUserLlcs = await _context.UserLlc
+                .Where(u => u.User.Email.Equals(currUserEmail))
+                .Select(u => u.LlcId)
+                .ToListAsync();
+            Console.WriteLine("User " + currUserEmail + " has these LLCs");
+            Console.WriteLine(currUserLlcs.ElementAt(0));
+            var documents = await _context.Document
+                .Include(d => d.DocumentType)
+                .Include(d => d.DocumentStatus)
+                .Include(d => d.Llc)
+                .Include(d => d.CniPosRequestorUser)
+                .Where(d => currUserLlcs.Contains(d.LlcID))
+                .ToListAsync();
+
+            return View(documents);
+
+
+
         }
 
         // GET: Documents/Details/5
