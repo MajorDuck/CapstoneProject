@@ -42,8 +42,6 @@ namespace CapstoneProject.Controllers
                 .Where(u => u.User.Email.Equals(currUserEmail))
                 .Select(u => u.LlcId)
                 .ToListAsync();
-            Console.WriteLine("User " + currUserEmail + " has these LLCs");
-            Console.WriteLine(currUserLlcs.ElementAt(0));
             var documents = await _context.Document
                 .Include(d => d.DocumentType)
                 .Include(d => d.DocumentStatus)
