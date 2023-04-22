@@ -2,10 +2,12 @@
 
 namespace Capstone.Models
 {
-	public class AspNetRoles
+    public class AspNetRoles
     {
-		public int LlcID { get; set; }
-        [DisplayName("Name")]
-        public string LlcName { get; set; }
-	}
+        [DisplayName("Role")]
+        public int Role { get; set; }
+
+        [DisplayName("Permissions")]
+        public int Permissions { get; set; }
+    }
 }

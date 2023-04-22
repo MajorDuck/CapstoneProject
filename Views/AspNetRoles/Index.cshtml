@@ -1,33 +1,36 @@
-﻿@model Capstone.Models.Llc
+﻿@model IEnumerable<Capstone.Models.AspNetRoles>
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Index";
 }
 
-<h1>AspNetRoles</h1>
+<h1>ASPNet Roles</h1>
 
-<h4>AspNetRoles</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LlcName" class="control-label"></label>
-                <input asp-for="LlcName" class="form-control" />
-                <span asp-validation-for="LlcName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Role">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Role">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Role">Delete</a>
+                </td>
+            </tr>
+        }
+     </tbody>
+</table>
