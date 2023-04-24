@@ -19,22 +19,22 @@
                     <thead>
                         <tr>
                             <th>
-                                Type
+                                @Html.DisplayNameFor(model => model.DocumentTypeID)
                             </th>
                             <th>
-                                CNI LLC
+                                @Html.DisplayNameFor(model => model.LlcID)
                             </th>
                             <th>
-                                Contract ID
+                                @Html.DisplayNameFor(model => model.DocumentStatusID)
                             </th>
                             <th>
-                                Status
+                                @Html.DisplayNameFor(model => model.DraftedByUserID)
                             </th>
                             <th>
-                                Last Updated
+                                @Html.DisplayNameFor(model => model.DateLastUpdated)
                             </th>
                             <th>
-                                Link
+                                @Html.DisplayNameFor(model => model.LinkToDocument)
                             </th>
                         </tr>
                     </thead>
@@ -49,10 +49,10 @@
                                     @Html.DisplayFor(modelItem => item.Llc.LlcName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
+                                    @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                    @Html.DisplayFor(modelItem => item.DraftedByUser.Email)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DateLastUpdated)
@@ -75,22 +75,22 @@
                     <thead>
                         <tr>
                             <th>
-                                Type
+                                    @Html.DisplayNameFor(model => model.DocumentTypeID)
                             </th>
                             <th>
-                                CNI LLC
+                                    @Html.DisplayNameFor(model => model.LlcID)
                             </th>
                             <th>
-                                Contract ID
+                                    @Html.DisplayNameFor(model => model.DocumentStatusID)
                             </th>
                             <th>
-                                Status
+                                    @Html.DisplayNameFor(model => model.DraftedByUserID)
                             </th>
                             <th>
-                                Last Updated
+                                    @Html.DisplayNameFor(model => model.DateLastUpdated)
                             </th>
                             <th>
-                                Link
+                                    @Html.DisplayNameFor(model => model.LinkToDocument)
                             </th>
                         </tr>
                     </thead>
@@ -105,10 +105,10 @@
                                         @Html.DisplayFor(modelItem => item.Llc.LlcName)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.CniPosRequestorUser.Email)
+                                        @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.DocumentStatus.DocumentStatusName)
+                                        @Html.DisplayFor(modelItem => item.DraftedByUser.Email)
                                 </td>
                                 <td>
                                         @Html.DisplayFor(modelItem => item.DateLastUpdated)
