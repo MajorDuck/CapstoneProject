@@ -58,7 +58,12 @@
                                     @Html.DisplayFor(modelItem => item.DateLastUpdated)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                    @{
+                                        if (item.LinkToDocument != null)
+                                        {
+                                            <a href="@item.LinkToDocument" target="_blank" rel="noopener noreferrer">Link</a>
+                                        }
+                                    }
                                 </td>
                             </tr>
                         }
@@ -109,7 +114,12 @@
                                         @Html.DisplayFor(modelItem => item.DateLastUpdated)
                                 </td>
                                 <td>
-                                        @Html.DisplayFor(modelItem => item.LinkToDocument)
+                                        @{
+                                            if (item.LinkToDocument != null)
+                                            {
+                                                <a href="@item.LinkToDocument" target="_blank" rel="noopener noreferrer">Link</a>
+                                            }
+                                        }
                                 </td>
                             </tr>
                             }
