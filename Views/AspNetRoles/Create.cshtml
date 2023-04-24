@@ -1,4 +1,5 @@
-﻿@model Capstone.Models.AspNetRoles
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
 
 @{
     ViewData["Title"] = "Create";
@@ -6,21 +7,15 @@
 
 <h1>Create</h1>
 
-<h4>ASPNet Role</h4>
+<h4>DocumentStatus</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control" />
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Permissions" class="control-label"></label>
-                <input asp-for="Permissions" class="form-control" />
-                <span asp-validation-for="Permissions" class="text-danger"></span>
+                <label for="roleName">Role Name:</label>
+                <input type="text" class="form-control" id="roleName" name="roleName" value="@Model" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -28,11 +23,12 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

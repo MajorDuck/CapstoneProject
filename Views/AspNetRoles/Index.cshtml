@@ -1,34 +1,41 @@
-﻿@model IEnumerable<Capstone.Models.AspNetRoles>
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>ASPNet Roles</h1>
-
+<h1>Roles</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                Id
             </th>
-            <th>Tools</th>
+            <th>
+                Name
+            </th>
+            <th>
+                Tools
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
+        @foreach (var role in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Role)
+                    @role.Id
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Role">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Role">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Role">Delete</a>
+                    @role.Name
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@role.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@role.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@role.Id">Delete</a>
                 </td>
             </tr>
         }
