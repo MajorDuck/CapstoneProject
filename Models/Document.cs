@@ -28,8 +28,9 @@ namespace Capstone.Models
 		public DocumentStatus DocumentStatus { get; set; }
         [DisplayName("Document Status")]
         public int DocumentStatusID { get; set; }
+        public IdentityUser DraftedByUser { get; set; }
         [DisplayName("Drafted by User")]
-        public int DraftedByUserID { get; set; }
+        public string DraftedByUserID { get; set; }
         [DisplayName("Date Last Updated")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm tt}")]
 		public DateTime DateLastUpdated { get; set; }

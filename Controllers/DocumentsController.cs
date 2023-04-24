@@ -10,6 +10,7 @@ using CapstoneProject.Data;
 using CapstoneProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Drawing.Printing;
+using System.Security.Claims;
 
 namespace CapstoneProject.Controllers
 {
@@ -33,6 +34,7 @@ namespace CapstoneProject.Controllers
                         .Include(d => d.DocumentStatus)
                         .Include(d => d.Llc)
                         .Include(d => d.CniPosRequestorUser)
+                        .Include(d => d.DraftedByUser)
                         .ToListAsync()) :
                               Problem("Entity set 'ApplicationDbContext.Document'  is null.");
 
@@ -47,6 +49,7 @@ namespace CapstoneProject.Controllers
                 .Include(d => d.DocumentStatus)
                 .Include(d => d.Llc)
                 .Include(d => d.CniPosRequestorUser)
+                .Include(d => d.DraftedByUser)
                 .Where(d => currUserLlcs.Contains(d.LlcID))
                 .ToListAsync();
 
@@ -70,6 +73,7 @@ namespace CapstoneProject.Controllers
                 .Include(d => d.DocumentStatus)
                 .Include(d => d.Llc)
                 .Include(d => d.CniPosRequestorUser)
+                .Include(d => d.DraftedByUser)
                 .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
@@ -128,6 +132,9 @@ namespace CapstoneProject.Controllers
             foreach (var error in errors) {
                 Console.WriteLine($"\n\n\n{error.ErrorMessage}\n\n\n");
             }
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            document.DraftedByUserID = claims.Value;
             _context.Add(document);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -198,6 +205,12 @@ namespace CapstoneProject.Controllers
 		[Authorize(Roles = "Administrators")]
 		public async Task<IActionResult> Edit(int id, [Bind("DocumentID,DocumentTypeID,LlcID,CniPosRequestorUserID,CniContractNumber,ThirdParty,VersionNumber,DocumentStatusID,DraftedByUserID,DateLastUpdated,LinkToDocument")] Document document)
         {
+            var drafted_by_user_id = await _context.Document
+                .Where(u => u.DocumentID.Equals(id))
+                .Select(u => u.DraftedByUserID)
+                .ToListAsync();
+            document.DraftedByUserID = drafted_by_user_id[0];
+            document.DateLastUpdated = DateTime.Now;
             if (id != document.DocumentID)
             {
                 return NotFound();
@@ -257,6 +270,7 @@ namespace CapstoneProject.Controllers
                 .Include(d => d.DocumentStatus)
                 .Include(d => d.Llc)
                 .Include(d => d.CniPosRequestorUser)
+                .Include(d => d.DraftedByUser)
                 .FirstOrDefaultAsync(m => m.DocumentID == id);
             if (document == null)
             {
