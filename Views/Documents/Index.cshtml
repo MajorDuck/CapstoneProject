@@ -159,9 +159,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateLastUpdated)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LinkToDocument)
-            </th>
             <th>Tools</th>
         </tr>
     </thead>
@@ -197,9 +194,12 @@
                 @Html.DisplayFor(modelItem => item.DateLastUpdated)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LinkToDocument)
-            </td>
-            <td>
+                    @{
+                        if (item.LinkToDocument != null)
+                        {
+                            <a href="@item.LinkToDocument" target="_blank" rel="noopener noreferrer">Link</a> <span> |</span>
+                        }
+                    }
                 <a asp-action="Edit" asp-route-id="@item.DocumentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DocumentID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.DocumentID">Delete</a>
@@ -219,7 +219,7 @@
         $(document).ready(function () {
             $("#document-table").DataTable({
                 'columnDefs': [{
-                    'targets': [9,10],
+                    'targets': [9],
                     'orderable': false,
                     'searchable': false,
                 }],
