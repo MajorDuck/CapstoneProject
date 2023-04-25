@@ -1,0 +1,45 @@
+﻿@model CapstoneProject.ViewModels.AspNetUserRolesViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>UserLlc</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="userRole.UserId" class="control-label></label"></label>
+                <select asp-for="userRole.UserId"
+                    asp-items="@Model.Users"
+                    class="form-control">
+                    <option disabled selected hidden>Select User by Email</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="userRole.RoleId" class="control-label"></label>
+                <select asp-for="userRole.RoleId"
+                        asp-items="@Model.Roles"
+                        class="form-control">
+                    <option disabled selected hidden>Select LLC</option>
+                </select>
+                <span asp-validation-for="userRole.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
