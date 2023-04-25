@@ -1,40 +1,42 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model List<IdentityRole>
+@model List<IdentityUserRole<string>>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>ASPNetUser Roles</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                Id
+               User ID
             </th>
             <th>
-                Name
+                Role ID
             </th>
+            <th>Tools</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var role in Model) {
-            <tr>
-                <td>
-                    @role.Id
-                </td>
-                <td>
-                    @role.Name
-                </td>
-                <td>
-                    
-                </td>
-            </tr>
-        }
-     </tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.UserId
+            </td>
+            <td>
+                @item.RoleId
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Edit</a> |
+                    <a asp-action="Details" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Details</a> |
+                    <a asp-action="Delete" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
 </table>
