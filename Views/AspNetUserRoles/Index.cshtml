@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model List<IdentityUserRole<string>>
+@model IEnumerable<UserRoleModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>User Roles</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-               User ID
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th>
-                Role ID
+                @Html.DisplayNameFor(model => model.RoleId)
             </th>
             <th>Tools</th>
         </tr>
@@ -26,13 +26,12 @@
         @foreach (var item in Model) {
         <tr>
             <td>
-                @item.UserId
+                @Html.DisplayFor(modelItem => item.User.Email)
             </td>
             <td>
-                @item.RoleId
+                    @Html.DisplayFor(modelItem => item.Role.Name)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Edit</a> |
                     <a asp-action="Details" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Details</a> |
                     <a asp-action="Delete" asp-route-userId="@item.UserId" asp-route-roleId="@item.RoleId">Delete</a>
             </td>

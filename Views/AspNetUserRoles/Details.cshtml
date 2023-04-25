@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model IdentityUserRole<string>
+@model UserRoleModel
 
 @{
     ViewData["Title"] = "Details";
@@ -12,20 +12,19 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            User Id:
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
         <dd class="col-sm-10">
-            @Model.UserId
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
         <dt class="col-sm-2">
-            Role Id:
+            @Html.DisplayNameFor(model => model.RoleId)
         </dt>
         <dd class="col-sm-10">
-            @Model.RoleId
+            @Html.DisplayFor(model => model.Role.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.UserId" asp-route-roleId="@Model.RoleId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

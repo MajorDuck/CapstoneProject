@@ -28,13 +28,27 @@ namespace CapstoneProject.Controllers
         public async Task<IActionResult> Index()
         {
             var userRoles = await _context.UserRoles.ToListAsync();
-            return View(userRoles);
+            List<UserRoleModel> user_roles = new List<UserRoleModel>();
+            foreach (var userRole in userRoles)
+            {
+                UserRoleModel user_role = new UserRoleModel();
+                user_role.UserId = userRole.UserId;
+                user_role.User = _context.Users.FirstOrDefault(u => u.Id == user_role.UserId);
+                user_role.RoleId = userRole.RoleId;
+                user_role.Role = _context.Roles.FirstOrDefault(r => r.Id == user_role.RoleId);
+                user_roles.Add(user_role);
+            }
+            return View(user_roles);
         }
         public async Task<IActionResult> Details(string userId, string roleId)
         {
-            var user = await _context.UserRoles.FindAsync(userId, roleId);
-
-            return View(user); 
+            var userRole = await _context.UserRoles.FindAsync(userId, roleId);
+            UserRoleModel user_role = new UserRoleModel();
+            user_role.UserId = userRole.UserId;
+            user_role.User = _context.Users.FirstOrDefault(u => u.Id == user_role.UserId);
+            user_role.RoleId = userRole.RoleId;
+            user_role.Role = _context.Roles.FirstOrDefault(r => r.Id == user_role.RoleId);
+            return View(user_role); 
         }
 
         public IActionResult Create()
@@ -63,8 +77,16 @@ namespace CapstoneProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserRoleModel userRole)
+        public async Task<IActionResult> Create(IdentityUserRole<string> userRole)
         {
+            /*var userRoleConv = new IdentityUserRole<string>
+            {
+                UserId = userRole.UserId,
+                RoleId = userRole.RoleId
+            };
+            var return_value = _context.UserRoles.Add(userRoleConv);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));*/
             if (ModelState.IsValid)
             {
                 var userRoleConv = new IdentityUserRole<string>
@@ -103,14 +125,20 @@ namespace CapstoneProject.Controllers
                 return NotFound();
             }
 
-            var user = await _context.UserRoles.FindAsync(userId, roleId);
+            var userRole = await _context.UserRoles.FindAsync(userId, roleId);
 
-            if (user == null)
+            if (userRole == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            UserRoleModel user_role = new UserRoleModel();
+            user_role.UserId = userRole.UserId;
+            user_role.User = _context.Users.FirstOrDefault(u => u.Id == user_role.UserId);
+            user_role.RoleId = userRole.RoleId;
+            user_role.Role = _context.Roles.FirstOrDefault(r => r.Id == user_role.RoleId);
+
+            return View(user_role);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -130,84 +158,5 @@ namespace CapstoneProject.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> Edit(string userId, string roleId)
-        {
-            if (roleId == null)
-            {
-                return NotFound();
-            }
-
-            var userRole = await _context.UserRoles.FindAsync(userId, roleId);
-            if (userRole == null)
-            {
-                return NotFound();
-            }
-
-            var newUserRole = new UserRoleModel
-            {
-                UserId = userRole.UserId,
-                RoleId = userRole.RoleId
-            };
-
-            var roles = _context.Roles.Select(a => new SelectListItem() // Get list of each role
-            {
-                Value = a.Id.ToString(),
-                Text = a.Name
-            }).ToList();
-
-            var users = _context.Users.Select(a => new SelectListItem() // Get list of each user
-            {
-                Value = a.Id.ToString(),
-                Text = a.UserName
-            }).ToList();
-
-            var viewModel = new AspNetUserRolesViewModel // Combine lists to send
-            {
-                Users = users,
-                Roles = roles,
-                userRole = newUserRole
-            };
-            return View(viewModel);
-        }
-        private bool UserRoleExists(string userId, string roleId)
-        {
-            return _context.UserRoles.Any(e => e.UserId == userId && e.RoleId == roleId);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditConfirmed(string userId, string roleId)
-        {
-            try
-                {
-                    // Check if the user role exists
-                    var userRole = await _context.UserRoles.FindAsync(userId, roleId);
-                    if (userRole == null)
-                    {
-                        return NotFound();
-                    }
-
-                    // Update the user role
-                    userRole.UserId = userId;
-                    userRole.RoleId = roleId;
-                    _context.Update(userRole);
-                    await _context.SaveChangesAsync();
-
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserRoleExists(userId, roleId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-        }
-
     }
 }

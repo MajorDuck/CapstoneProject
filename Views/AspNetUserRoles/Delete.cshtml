@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@model IdentityUserRole<string>
+@model UserRoleModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,9 +12,18 @@
     <h4>User Role Pair</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Model.UserId
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
         </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
     </dl>
     
     <form asp-action="Delete" asp-route-userId="@Model.UserId" asp-route-roleId="@Model.RoleId">
