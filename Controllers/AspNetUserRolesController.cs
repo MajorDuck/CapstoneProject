@@ -177,7 +177,7 @@ namespace CapstoneProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditConfirmed(string userId, string roleId)
+        public async Task<IActionResult> EditConfirmed([Bind("userId,roleId")] string userId, string roleId)
         {
             try
                 {
