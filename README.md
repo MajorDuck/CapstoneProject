@@ -20,7 +20,7 @@ To the right of aformentioned link is a 'manage' drop down list which serves as 
   * Password - Capdummy123!   
     
 ## Credits:    
-* Group 11: An Nguyen, Aiden Witt, Brandon Michaud ,Camron Benefield & Chanon Cserepy        
+* Group 11: An Nguyen, Aiden Witt, Brandon Michaud, Camron Benefield & Chanon Cserepy        
 * Sponsor: Chickasaw Nation Industries, Inc. 2600 John Saxon Blvd, Norman, OK 73071    
 * Advisors: Mr. Archer, Mr. Huebsch & Mr. Roland, Esq.   
 
