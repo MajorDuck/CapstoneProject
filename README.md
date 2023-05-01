@@ -24,6 +24,11 @@ To the right of aformentioned link is a 'manage' drop down list which serves as 
 * Sponsor: Chickasaw Nation Industries, Inc. 2600 John Saxon Blvd, Norman, OK 73071    
 * Advisors: Mr. Archer, Mr. Huebsch & Mr. Roland, Esq.   
 
-
+## Resources:
+* https://www.youtube.com/watch?v=T-e554Zt3n4 (AspNet tutorial)
+* https://www.youtube.com/watch?v=E7Voso411Vs (AspNet tutorial)
+* https://learn.microsoft.com/en-us/aspnet/core/security/authorization/secure-data?view=aspnetcore-7.0 (User Authentication tutorial)
+* https://www.c-sharpcorner.com/UploadFile/ff2f08/multiple-models-in-single-view-in-mvc/ (model/view tutorial)
+   
 ![Wire Frame for Website](https://github.com/MajorDuck/CapstoneProject/blob/master/SiteWireframe.pdf?raw=true)
 
