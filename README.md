@@ -16,8 +16,8 @@ To the right of aformentioned link is a 'manage' drop down list which serves as 
 ## Access:  
 * Site: https://cnicapstoneproject.azurewebsites.net/   
 * Test account (non-admin, some linked Llcs):    
-** Email - group11dummy @ gmail.com
-** Password - Capdummy123!   
+- Email - group11dummy @ gmail.com
+- Password - Capdummy123!   
     
 ## Credits:    
 * Group 11: An Nguyen, Aiden Witt, Brandon Michaud ,Camron Benefield & Chanon Cserepy        
