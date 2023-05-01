@@ -13,11 +13,11 @@ To the right of aformentioned link is a 'manage' drop down list which serves as 
 * UserLlcs - Add or manage a User/Llcs pair in the 'UserLlc' table (for auto-population of 'Llc' in 'Create New').   
 * Llcs - Add or manage a new company Llc to the 'Llc' table.    
   
-## Access:   
-Link: https://cnicapstoneproject.azurewebsites.net/   
-Test account (non-admin, some linked Llcs):   
-* Email - group11dummy @ gmail.com
-* Password - Capdummy123!   
+## Access:  
+* Site: https://cnicapstoneproject.azurewebsites.net/   
+* Test account (non-admin, some linked Llcs):    
+** Email - group11dummy @ gmail.com
+** Password - Capdummy123!   
     
 ## Credits:    
 * Group 11: An Nguyen, Aiden Witt, Brandon Michaud ,Camron Benefield & Chanon Cserepy        
